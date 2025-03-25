@@ -1,4 +1,5 @@
 ﻿using GestaoDeVendas.Application.Automapper;
+using GestaoDeVendas.Application.UseCases.Costumers.GetCostumersList;
 using GestaoDeVendas.Application.UseCases.Costumers.Register;
 using GestaoDeVendas.Application.UseCases.Products.Delete;
 using GestaoDeVendas.Application.UseCases.Products.GetAllProducts;
@@ -23,6 +24,7 @@ public static class DependencyInjectionExtension
 	private static void AddDependencyInjection(IServiceCollection services)
 	{
 		services.AddScoped<IRegisterCostumerUseCase, RegisterCostumerUseCase>();
+		services.AddScoped<IGetCostumersListUseCase, GetCostumersListUseCase>();
 
 		services.AddScoped<IRegisterProductUseCase, RegisterProductUseCase>();
 		services.AddScoped<IUpdateProductUseCase, UpdateProductUseCase>();

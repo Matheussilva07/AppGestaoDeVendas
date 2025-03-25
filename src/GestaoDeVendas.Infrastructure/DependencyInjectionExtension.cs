@@ -26,6 +26,9 @@ public static class DependencyInjectionExtension
 	private static void AddDependencyInjection(IServiceCollection services)
 	{
 		services.AddScoped<IWriteOnlyCostumersRepository, CostumersRepository>();
+		services.AddScoped<IReadOnlyCostumersRepository, CostumersRepository>();
+
+
 		services.AddScoped<IWriteOnlyProductsRepository, ProductsRepository>();
 		services.AddScoped<IReadOnlyProductsRepository, ProductsRepository>();
 		services.AddScoped<IUpdateOnlyProductsRepository, ProductsRepository>();

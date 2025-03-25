@@ -1,4 +1,5 @@
-﻿using GestaoDeVendas.Application.UseCases.Costumers.Register;
+﻿using GestaoDeVendas.Application.UseCases.Costumers.GetCostumersList;
+using GestaoDeVendas.Application.UseCases.Costumers.Register;
 using GestaoDeVendas.Communication.Costumers.Requests;
 using GestaoDeVendas.Communication.Costumers.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -17,5 +18,17 @@ public class CostumersController : ControllerBase
 		var response = await useCase.ExecuteAsync(request);
 
 		return Created(string.Empty, response);
+	}
+
+	[HttpGet]
+	[ProducesResponseType(typeof(List<ResponseShortCostumerJson>), StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	public async Task<IActionResult> GetAll([FromServices] IGetCostumersListUseCase useCase)
+	{
+		var response = await useCase.ExecuteAsync();
+
+		if (response.Count > 0)
+			return Ok(response);
+		return NoContent();
 	}
 }

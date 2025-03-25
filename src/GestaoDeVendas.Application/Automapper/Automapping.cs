@@ -34,6 +34,8 @@ public class Automapping : Profile
     private void EntityToResponse()
     {
         CreateMap<Costumer, ResponseRegisteredCostumerJson>();
+        CreateMap<Costumer, ResponseShortCostumerJson>();
+
         CreateMap<Product, ResponseRegisteredProductJson>();
 
         CreateMap<Sale, ResponseRegisteredSaleJson>();
