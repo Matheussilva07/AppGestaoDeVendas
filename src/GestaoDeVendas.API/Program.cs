@@ -1,6 +1,8 @@
 using GestaoDeVendas.Infrastructure;
 using GestaoDeVendas.Application;
 using GestaoDeVendas.Infrastructure.Migrations;
+using GestaoDeVendas.Exception.ExceptionBase;
+using GestaoDeVendas.API.Filters;
 
 namespace GestaoDeVendas.API;
 
@@ -20,6 +22,8 @@ public class Program
 		builder.Services.AddRouting(options => options.LowercaseUrls = true);
 		builder.Services.AddInfrastructure_Application();
 		builder.Services.AddInfrastructure(builder.Configuration);
+
+		builder.Services.AddMvc(config => config.Filters.Add(new ExceptionFilter()));
 
 		var app = builder.Build();
 

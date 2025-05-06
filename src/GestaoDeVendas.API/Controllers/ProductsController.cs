@@ -1,6 +1,7 @@
 ﻿using GestaoDeVendas.Application.UseCases.Products.Delete;
 using GestaoDeVendas.Application.UseCases.Products.GetAllProducts;
 using GestaoDeVendas.Application.UseCases.Products.GetProductById;
+using GestaoDeVendas.Application.UseCases.Products.GetProductByName;
 using GestaoDeVendas.Application.UseCases.Products.Register;
 using GestaoDeVendas.Application.UseCases.Products.Update;
 using GestaoDeVendas.Communication.Products.Requests;
@@ -8,7 +9,7 @@ using GestaoDeVendas.Communication.Products.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoDeVendas.API.Controllers;
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class ProductsController : ControllerBase
 {
@@ -41,6 +42,17 @@ public class ProductsController : ControllerBase
 	public async Task<IActionResult> GetProductById([FromServices] IGetProductByIdUseCase useCase, [FromRoute] long productId)
 	{
 		var response = await useCase.Executeasync(productId);
+
+		return Ok(response);
+	}
+
+	[HttpGet("product-by-name")]
+	[ProducesResponseType(typeof(ResponseProductDetailsJson), StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<IActionResult> GetProductByName([FromServices] IGetProductByNameUseCase useCase, [FromQuery] string productName)
+	{
+		var response = await useCase.ExecuteAscyn(productName);
 
 		return Ok(response);
 	}

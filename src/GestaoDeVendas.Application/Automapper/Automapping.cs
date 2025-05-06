@@ -6,6 +6,7 @@ using GestaoDeVendas.Communication.Products.Requests;
 using GestaoDeVendas.Communication.Products.Responses;
 using GestaoDeVendas.Communication.Sales.Requests;
 using GestaoDeVendas.Communication.Sales.Responses;
+using GestaoDeVendas.Communication.Users.Requests;
 using GestaoDeVendas.Domain.Entities;
 using System.Xml.Linq;
 
@@ -23,18 +24,23 @@ public class Automapping : Profile
     private void RequestToEntity()
     {
         CreateMap<RequestRegisterCostumerJson, Costumer>();
-        CreateMap<RequestRegisterProductJson, Product>();
+        CreateMap<RequestUpdateCostumerJson, Costumer>();
 
+        CreateMap<RequestRegisterProductJson, Product>();
         CreateMap<RequestUpdateProductJson, Product>();
 
         CreateMap<RequestRegisterSaleJson, Sale>();
         CreateMap<SoldProductData, SoldProduct>();
+
+
+        CreateMap<RequestRegisterUserJson, User>().ForMember(user => user.Password, config => config.Ignore());
 		
 	}
     private void EntityToResponse()
     {
         CreateMap<Costumer, ResponseRegisteredCostumerJson>();
         CreateMap<Costumer, ResponseShortCostumerJson>();
+        CreateMap<Costumer, ResponseCostumerJson>();
 
         CreateMap<Product, ResponseRegisteredProductJson>();
 

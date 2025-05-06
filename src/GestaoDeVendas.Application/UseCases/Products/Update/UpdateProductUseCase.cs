@@ -2,6 +2,7 @@
 using GestaoDeVendas.Communication.Products.Requests;
 using GestaoDeVendas.Domain;
 using GestaoDeVendas.Domain.Repositories.Products;
+using GestaoDeVendas.Exception.ExceptionBase;
 
 namespace GestaoDeVendas.Application.UseCases.Products.Update;
 public class UpdateProductUseCase : IUpdateProductUseCase
@@ -29,13 +30,15 @@ public class UpdateProductUseCase : IUpdateProductUseCase
 		await _unitOfWork.CommitAsync();
 	}
 
-	private void Validate(RequestUpdateProductJson request)
+	private static void Validate(RequestUpdateProductJson request)
 	{
 		var result = new UpdateProductValidator().Validate(request);
 
 		if(result.IsValid == false)
 		{
-			throw new Exception("Dados inválidos!");
+			var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
+
+			throw new ErrorOnValidationExcepion(errorMessages);
 		}
 	}
 }

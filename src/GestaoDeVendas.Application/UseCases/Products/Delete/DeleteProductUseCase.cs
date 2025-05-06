@@ -1,5 +1,7 @@
 ﻿using GestaoDeVendas.Domain;
 using GestaoDeVendas.Domain.Repositories.Products;
+using GestaoDeVendas.Exception;
+using GestaoDeVendas.Exception.ExceptionBase;
 
 namespace GestaoDeVendas.Application.UseCases.Products.Delete;
 internal class DeleteProductUseCase : IDeleteProductUseCase
@@ -17,7 +19,7 @@ internal class DeleteProductUseCase : IDeleteProductUseCase
 
 	public async Task ExecuteAsync(long productId)
 	{
-		var product = await _updateRepository.GetProductByIdAsync(productId) ?? throw new ArgumentException("Produto não encontrado!");
+		var product = await _updateRepository.GetProductByIdAsync(productId) ?? throw new NotFoundException(ExceptionMessages.PRODUTO_NOT_FOUND);
 
 		 _writeRepository.Delete(product);
 

@@ -1,10 +1,15 @@
 ﻿using GestaoDeVendas.Domain;
+using GestaoDeVendas.Domain.Repositories;
 using GestaoDeVendas.Domain.Repositories.Costumers;
 using GestaoDeVendas.Domain.Repositories.Products;
 using GestaoDeVendas.Domain.Repositories.Sales;
 using GestaoDeVendas.Domain.Repositories.SoldProducts;
+using GestaoDeVendas.Domain.Security.PasswordEncryptor;
+using GestaoDeVendas.Domain.Security.Token;
 using GestaoDeVendas.Infrastructure.DataAccess;
 using GestaoDeVendas.Infrastructure.Repositories;
+using GestaoDeVendas.Infrastructure.Security.PasswordEncryptor;
+using GestaoDeVendas.Infrastructure.Security.Token;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +21,7 @@ public static class DependencyInjectionExtension
 	{
 		AddDbContext(services, configuration);
 		AddDependencyInjection(services);
+		AddSecurityToken(services, configuration);
 	}
 	private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
 	{
@@ -27,6 +33,7 @@ public static class DependencyInjectionExtension
 	{
 		services.AddScoped<IWriteOnlyCostumersRepository, CostumersRepository>();
 		services.AddScoped<IReadOnlyCostumersRepository, CostumersRepository>();
+		services.AddScoped<IUpdateOnlyCostumerRepository, CostumersRepository>();
 
 
 		services.AddScoped<IWriteOnlyProductsRepository, ProductsRepository>();
@@ -38,5 +45,20 @@ public static class DependencyInjectionExtension
 
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
 		services.AddScoped<IReadOnlySoldProductsRepository, SoldProductsRepository>();
+
+
+		services.AddScoped<IWriteOnlyUserRepository, UserRepository>();
+
+
+		services.AddScoped<IPasswordEncryptor, PasswordEncryptor>();
+	}
+
+	private static void AddSecurityToken(IServiceCollection services, IConfiguration configuration)
+	{
+		string signingKey = configuration.GetValue<string>("Jwt:signingKey")!;
+		int tokenLifetime = configuration.GetValue<int>("Jwt:tokenLifetime");
+
+		services.AddScoped<ITokenGenerator>(config => new TokenGenerator(signingKey, tokenLifetime));
 	}
 }
+ 

@@ -4,7 +4,7 @@ using GestaoDeVendas.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestaoDeVendas.Infrastructure.Repositories;
-internal class CostumersRepository : IWriteOnlyCostumersRepository , IReadOnlyCostumersRepository
+internal class CostumersRepository : IWriteOnlyCostumersRepository, IReadOnlyCostumersRepository, IUpdateOnlyCostumerRepository
 {
 	private readonly SaleManagerDbContext _dbContext;
 
@@ -18,8 +18,28 @@ internal class CostumersRepository : IWriteOnlyCostumersRepository , IReadOnlyCo
 		await _dbContext.Costumers.AddAsync(costumer);
 	}
 
+	public void Delete(Costumer costumer)
+	{
+		_dbContext.Costumers.Remove(costumer);
+	}
+
+	async Task<Costumer?> IReadOnlyCostumersRepository.GetCostumerByIdAsync(long costumerId)
+	{
+		return await _dbContext.Costumers.AsNoTracking().FirstOrDefaultAsync(c => c.Id == costumerId);
+	}
+
 	public async Task<List<Costumer>> GetCostumersListAsync()
 	{
 		return await _dbContext.Costumers.AsNoTracking().ToListAsync();
+	}
+
+	async Task<Costumer?> IUpdateOnlyCostumerRepository.GetCostumerByIdAsync(long costumerId)
+	{
+		return await _dbContext.Costumers.FirstOrDefaultAsync(c => c.Id == costumerId);
+	}
+
+	void IUpdateOnlyCostumerRepository.Update(Costumer costumer)
+	{
+		_dbContext.Costumers.Update(costumer);
 	}
 }

@@ -4,6 +4,7 @@ using GestaoDeVendas.Communication.Products.Responses;
 using GestaoDeVendas.Domain;
 using GestaoDeVendas.Domain.Entities;
 using GestaoDeVendas.Domain.Repositories.Products;
+using GestaoDeVendas.Exception.ExceptionBase;
 
 namespace GestaoDeVendas.Application.UseCases.Products.Register;
 internal class RegisterProductUseCase : IRegisterProductUseCase
@@ -38,7 +39,9 @@ internal class RegisterProductUseCase : IRegisterProductUseCase
 
 		if(result.IsValid == false)
 		{
-			throw new ArgumentException("Dados inválidos!");
+			var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
+
+			throw new ErrorOnValidationExcepion(errorMessages);
 		}
 	}
 }
