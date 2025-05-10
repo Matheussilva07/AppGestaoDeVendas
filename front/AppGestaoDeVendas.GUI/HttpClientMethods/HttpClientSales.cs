@@ -1,4 +1,7 @@
 ﻿using AppGestaoDeVendas.GUI.Communication.Sales.Requests;
+using AppGestaoDeVendas.GUI.Communication.Sales.Responses;
+using Newtonsoft.Json;
+using System.Globalization;
 using System.Net.Http.Json;
 
 namespace AppGestaoDeVendas.GUI.HttpClientMethods;
@@ -16,6 +19,33 @@ internal class HttpClientSales
 		return httpResponse.IsSuccessStatusCode;
 	}
 
+	public static async Task<List<ResponseSaleFilteredByDate>?> FilterSalesByDate(DateOnly period)
+	{
+		HttpResponseMessage httpResponse = new();
+
+		try
+		{
+			string route = $"/sales/filter-sales?period={period:MM/yyyy}";
+
+			var client = GetHttpClient();
+
+			httpResponse = await client.GetAsync(route);
+
+			var content = await httpResponse.Content.ReadAsStringAsync();
+
+			var sales = JsonConvert.DeserializeObject<List<ResponseSaleFilteredByDate>>(content);
+
+			return sales;
+		}
+		catch
+		{
+			var errorMessage = await httpResponse.Content.ReadAsStringAsync();
+
+			MessageBox.Show(errorMessage);
+
+			return [];
+		}
+	}
 	private static HttpClient GetHttpClient()
 	{
 		var client = new HttpClient

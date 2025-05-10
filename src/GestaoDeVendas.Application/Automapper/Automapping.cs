@@ -45,6 +45,17 @@ public class Automapping : Profile
         CreateMap<Product, ResponseRegisteredProductJson>();
 
         CreateMap<Sale, ResponseRegisteredSaleJson>();
+        CreateMap<SoldProduct, ResponseSaleFilteredByDateJson>()
+            .ForMember(dest => dest.Name, config => config.MapFrom(src => src.Sale.Costumer.Name))
+            .ForMember(dest => dest.Email, config => config.MapFrom(src => src.Sale.Costumer.Email))
+            .ForMember(dest => dest.Telephone, config => config.MapFrom(src => src.Sale.Costumer.Telephone))
+            .ForMember(dest => dest.Address, config => config.MapFrom(src => src.Sale.Costumer.Address))
+            .ForMember(dest => dest.Salesman, config => config.MapFrom(src => src.Sale.Salesman))
+            .ForMember(dest => dest.DateOfSale, config => config.MapFrom(src => src.Sale.DateOfSale));
+        
+            //.ForMember(dest => dest.Products.Select(e => e.Product).ToList(), config => config.MapFrom(origem => origem.Product.Price))
+            //.ForPath(dest => dest.Products, config => config.MapFrom(origem => origem.Product));
+            //.ForMember(dest => dest.TotalSaleAmount, config => config.MapFrom(src => src.Sale.TotalSaleAmount));
 
         CreateMap<Sale, ResponseSaleByIdJson>()
             .ForMember(dest => dest.Name, config => config.MapFrom(src => src.Costumer.Name))

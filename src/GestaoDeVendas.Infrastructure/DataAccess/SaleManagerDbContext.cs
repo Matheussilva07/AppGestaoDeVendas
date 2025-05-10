@@ -12,7 +12,7 @@ internal class SaleManagerDbContext: DbContext
     public DbSet<Product> Products { get; set; }
     public DbSet<Costumer> Costumers { get; set; }
     public DbSet<Sale> Sales { get; set; }
-    public DbSet<SoldProduct> SoldProducts { get; set; }
+	public DbSet<SoldProduct> SoldProducts { get; set; }
 
 	
 }

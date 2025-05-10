@@ -1,4 +1,5 @@
 ﻿using GestaoDeVendas.Application.UseCases.Sales.Delete;
+using GestaoDeVendas.Application.UseCases.Sales.FilterSalesByDate;
 using GestaoDeVendas.Application.UseCases.Sales.GetSaleById;
 using GestaoDeVendas.Application.UseCases.Sales.Register;
 using GestaoDeVendas.Communication.Sales.Requests;
@@ -33,12 +34,24 @@ public class SalesController : ControllerBase
 		return Ok(response);
 	}
 
+	[HttpGet("filter-sales")]
+	[ProducesResponseType(typeof(ResponseSaleFilteredByDateJson),StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	public async Task<IActionResult> FilterSales([FromServices] IFilterSalesByDateUseCase useCase, [FromQuery] DateOnly period)
+	{
+		var response = await useCase.ExecuteAsync(period);
+
+		if(response.Count > 0)
+			return Ok(response);
+		return NoContent();
+	}
+
 	[HttpDelete]
 	[Route("{id}")]
-	[ProducesResponseType(StatusCodes.Status204NoContent)]	
-	[ProducesResponseType(StatusCodes.Status404NotFound)]	
-	[ProducesResponseType(StatusCodes.Status400BadRequest)]	
-	public async Task<IActionResult> Delete([FromServices] IDeleteSaleUseCase useCase, [FromRoute]long id)
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<IActionResult> Delete([FromServices] IDeleteSaleUseCase useCase, [FromRoute] long id)
 	{
 		await useCase.ExecuteAsync(id);
 

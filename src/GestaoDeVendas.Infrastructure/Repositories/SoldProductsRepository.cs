@@ -15,6 +15,8 @@ internal class SoldProductsRepository : IReadOnlySoldProductsRepository
 
 	public async Task<List<Product>> GetSoldProductsAsync(long saleId)
 	{
-		return await _dbContext.SoldProducts.Where(s => s.SaleId == saleId).Select(p => p.Product).ToListAsync();
+		var products = await _dbContext.SoldProducts.Where(s => s.SaleId == saleId).Select(p => p.Product).ToListAsync();
+
+		return products;
 	}
 }

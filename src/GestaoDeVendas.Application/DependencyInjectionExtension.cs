@@ -11,6 +11,7 @@ using GestaoDeVendas.Application.UseCases.Products.GetProductByName;
 using GestaoDeVendas.Application.UseCases.Products.Register;
 using GestaoDeVendas.Application.UseCases.Products.Update;
 using GestaoDeVendas.Application.UseCases.Sales.Delete;
+using GestaoDeVendas.Application.UseCases.Sales.FilterSalesByDate;
 using GestaoDeVendas.Application.UseCases.Sales.GetSaleById;
 using GestaoDeVendas.Application.UseCases.Sales.Register;
 using GestaoDeVendas.Application.UseCases.SoldProducts;
@@ -55,6 +56,7 @@ public static class DependencyInjectionExtension
 		services.AddScoped<IGetSaleByIdUseCase, GetSaleByIdUseCase>();
 		services.AddScoped<IDeleteSaleUseCase, DeleteSaleUseCase>();
 		services.AddScoped<IGetProductsListOfASaleUseCase, GetProductsListOfASaleUseCase>();
+		services.AddScoped<IFilterSalesByDateUseCase, FilterSalesByDateUseCase>();
 
 		#endregion
 

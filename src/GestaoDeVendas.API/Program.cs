@@ -3,6 +3,7 @@ using GestaoDeVendas.Application;
 using GestaoDeVendas.Infrastructure.Migrations;
 using GestaoDeVendas.Exception.ExceptionBase;
 using GestaoDeVendas.API.Filters;
+using Microsoft.OpenApi.Models;
 
 namespace GestaoDeVendas.API;
 
@@ -23,7 +24,16 @@ public class Program
 		builder.Services.AddInfrastructure_Application();
 		builder.Services.AddInfrastructure(builder.Configuration);
 
-		builder.Services.AddMvc(config => config.Filters.Add(new ExceptionFilter()));
+		builder.Services.AddSwaggerGen(options =>
+		{
+			options.MapType<DateOnly>(() => new OpenApiSchema
+			{
+				Type = "string",
+				Format = "date"
+			});
+		});
+
+		//builder.Services.AddMvc(config => config.Filters.Add(new ExceptionFilter()));
 
 		var app = builder.Build();
 

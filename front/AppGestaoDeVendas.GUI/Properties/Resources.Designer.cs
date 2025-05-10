@@ -63,6 +63,16 @@ namespace AppGestaoDeVendas.GUI.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap adicionar {
+            get {
+                object obj = ResourceManager.GetObject("adicionar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ChatGPT_Image_30_de_mar__de_2025__11_30_37 {
             get {
                 object obj = ResourceManager.GetObject("ChatGPT Image 30 de mar. de 2025, 11_30_37", resourceCulture);
