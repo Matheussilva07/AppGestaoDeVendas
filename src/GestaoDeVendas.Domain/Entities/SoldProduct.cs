@@ -7,4 +7,18 @@ public class SoldProduct
 	public uint ProductAmount {  get; set; } 
 	public Product Product { get; set; } = default!;
 	public Sale Sale { get; set; } = default!;
+
+	public override bool Equals(object obj)
+	{
+		if (obj == null || GetType() != obj.GetType())
+			return false;
+
+		SoldProduct other = (SoldProduct)obj;
+		return SaleId == other.SaleId;
+	}
+
+	public override int GetHashCode()
+	{
+		return HashCode.Combine(SaleId);
+	}
 }

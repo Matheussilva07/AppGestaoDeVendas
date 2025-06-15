@@ -42,4 +42,9 @@ internal class CostumersRepository : IWriteOnlyCostumersRepository, IReadOnlyCos
 	{
 		_dbContext.Costumers.Update(costumer);
 	}
+
+	public async Task<Costumer?> GetCostumerByNameAsync(string nameCostumer)
+	{
+		return await _dbContext.Costumers.Where(c => c.Name.StartsWith(nameCostumer)).FirstOrDefaultAsync();
+	}
 }

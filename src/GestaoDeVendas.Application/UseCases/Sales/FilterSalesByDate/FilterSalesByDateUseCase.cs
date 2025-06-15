@@ -1,52 +1,59 @@
-﻿using AutoMapper;
-using GestaoDeVendas.Communication.Sales.Responses;
+﻿using GestaoDeVendas.Communication.Sales.Responses;
 using GestaoDeVendas.Domain.Entities;
 using GestaoDeVendas.Domain.Repositories.Sales;
-using GestaoDeVendas.Domain.Repositories.SoldProducts;
-using System.Collections.Generic;
-using System.Data;
 
 namespace GestaoDeVendas.Application.UseCases.Sales.FilterSalesByDate;
 internal class FilterSalesByDateUseCase : IFilterSalesByDateUseCase
 {
-	private readonly IMapper _mapper;
 	private readonly IReadOnlySalesRepository _salesRepository;
-	private readonly IReadOnlySoldProductsRepository _readOnlySoldProductsRepository;
 
-	public FilterSalesByDateUseCase(IMapper mapper, IReadOnlySalesRepository repository, IReadOnlySoldProductsRepository readOnlySoldProductsRepository)
+	public FilterSalesByDateUseCase( IReadOnlySalesRepository repository)
 	{
-		_mapper = mapper;
 		_salesRepository = repository;
-		_readOnlySoldProductsRepository = readOnlySoldProductsRepository;
 	}
 
 	public async Task<HashSet<ResponseSaleFilteredByDateJson>> ExecuteAsync(DateOnly period)
 	{
 		var sales = await _salesRepository.FilterSalesByDateAsync(period);
+		
+		var vendasList = new HashSet<ResponseSaleFilteredByDateJson>();
 
-		var vendas = new HashSet<ResponseSaleFilteredByDateJson>();
-
-		foreach (var item in sales)
+		foreach (var venda in sales)
 		{
-			var soldProducts = await _readOnlySoldProductsRepository.GetSoldProductsAsync(item.SaleId);
-
-			vendas.Add(new ResponseSaleFilteredByDateJson()
+			var sale = new ResponseSaleFilteredByDateJson
 			{
-				Id = item.Sale.Id,
-				Salesman = item.Sale.Salesman,
-				AddressMarket = item.Sale.AddressMarket,
-				DateOfSale = item.Sale.DateOfSale,
-				TotalSaleAmount = item.Sale.TotalSaleAmount,
-				Name = item.Sale.Costumer.Name,
-				Email = item.Sale.Costumer.Email,
-				Telephone = item.Sale.Costumer.Telephone,
-				Address= item.Sale.Costumer.Address,
-			
-				Products = soldProducts
-			});			
+				Id = venda.Sale.SaleId,
+				Salesman = venda.Sale.Salesman,
+				AddressMarket = venda.Sale.AddressMarket,
+				DateOfSale = venda.Sale.DateOfSale,
+				PaymentType = (Communication.Enums.PaymentType)venda.Sale.PaymentType,
+				TotalSaleAmount = venda.Sale.TotalSaleAmount,
+				Name = venda.Sale.Costumer.Name,
+				Email = venda.Sale.Costumer.Email,
+				Telephone = venda.Sale.Costumer.Telephone,
+				Address = venda.Sale.Costumer.Address
+			};
+
+			foreach (var item in venda.Sale.Products)
+			{
+
+				sale.Products.Add(new Product
+				{
+					Id = item.Product.Id,
+					Name = item.Product.Name,
+					Discription = item.Product.Discription,
+					Code = item.Product.Code,
+					Price = item.Product.Price,
+
+					Amount = (int)item.ProductAmount
+				});
+			}
+
+            vendasList.Add(sale);
 		}
 
-			return vendas;
+		return vendasList;
 	}
+
 }
 

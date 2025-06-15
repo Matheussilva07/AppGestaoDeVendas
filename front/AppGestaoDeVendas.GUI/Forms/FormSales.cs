@@ -1,4 +1,5 @@
-﻿using AppGestaoDeVendas.GUI.Communication.Products.Responses;
+﻿using AppGestaoDeVendas.GUI.Communication.Enums;
+using AppGestaoDeVendas.GUI.Communication.Products.Responses;
 using AppGestaoDeVendas.GUI.Communication.Sales.Requests;
 using AppGestaoDeVendas.GUI.HttpClientMethods;
 
@@ -7,8 +8,9 @@ public partial class FormSales : Form
 {
 	private long _productId = 0;
 	private ResponseProduct? _product;
-
 	private IList<SoldProduct> _productsList = [];
+	private long _costumerId;
+
 	public FormSales()
 	{
 		InitializeComponent();
@@ -16,35 +18,40 @@ public partial class FormSales : Form
 	private async void Btn_Register_Click(object sender, EventArgs e)
 	{
 
+		PaymentType paymentType = comboBox_PaymentType.Text switch
+		{
+			"Cartão" => PaymentType.Card,
+			"Pix" => PaymentType.Pix,
+			"Boleto" => PaymentType.Boleto,
+			_ => throw new NotImplementedException()
+		};
+			
 		var request = new RequestRegisterSale
 		{
 			Salesman = Txt_Salesman.Text,
 			AddressMarket = comboBox_MarketAddress.Text,
-			CostumerId = 3,
-			Products = _productsList
-
+			PaymentType = paymentType,
+			CostumerId = _costumerId,
+			Products = _productsList	
 		};
 
-		bool isSuccessfull = await HttpClientSales.DoPost(request);
+		bool isSuccessfull = await HttpClient_Sales.DoPost(request);
 
-
-		if (isSuccessfull)
+		if (!isSuccessfull)
 		{
-			MessageBox.Show("Venda cadastrada.");
+			MessageBox.Show("Erro ao cadastrar a venda.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			return;
 		}
-		else
-		{
-			MessageBox.Show("Erro ao cadastrar a venda.");
-		}
+		MessageBox.Show("Venda cadastrada.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 	}
 
 	private async void Btn_Pesquisar_Produto_Click(object sender, EventArgs e)
 	{
-		_product = await HttpClientProducts.DoGetByName(TxtProduct.Text);
+		_product = await HttpClient_Products.DoGetProductByName(TxtProduct.Text);
 
 		if (_product is not null)
 		{
-			_productId = _product.Id;
+			_productId = (long)_product.Id;
 
 			TxtProduct.Text = _product.Name;
 		}
@@ -60,14 +67,25 @@ public partial class FormSales : Form
 				ProductAmount = (uint)Convert.ToInt32(Txt_Amount.Text)
 			});
 
-			richTextBox_ProductsList.AppendText($"{_product.Name}: {Txt_Amount.Text}\n");
-
+			richTextBox_ProductsList.AppendText($"{_product!.Name}: {Txt_Amount.Text}\n");
 		}
 	}
 
 	private void Vendas_StripMenu_Click(object sender, EventArgs e)
 	{
 		var form = new FormSalesList();
+		this.Opacity = 0;
 		form.ShowDialog();
+		this.Opacity = 1;
+	}
+
+	private void Btn_Search_Costumers_Click(object sender, EventArgs e)
+	{
+		var form = new FormCostumers();
+		this.Opacity = 0;
+		form.ShowDialog();
+		_costumerId = form.CostumerId;
+		Txt_Customer.Text = form.CostumerName;
+		this.Opacity = 1;
 	}
 }

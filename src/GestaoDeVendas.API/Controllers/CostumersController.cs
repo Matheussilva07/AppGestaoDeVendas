@@ -1,4 +1,5 @@
 ﻿using GestaoDeVendas.Application.UseCases.Costumers.Delete;
+using GestaoDeVendas.Application.UseCases.Costumers.GetByName;
 using GestaoDeVendas.Application.UseCases.Costumers.GetCostumerByName;
 using GestaoDeVendas.Application.UseCases.Costumers.GetCostumersList;
 using GestaoDeVendas.Application.UseCases.Costumers.Register;
@@ -69,5 +70,16 @@ public class CostumersController : ControllerBase
 		await useCase.ExecuteAsync(costumerId);
 
 		return NoContent();
+	}
+
+	[HttpGet("get-by-name")]
+	[ProducesResponseType(typeof(ResponseCostumerJson), StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<IActionResult> GetByName([FromServices] IGetByNameUseCase useCase, [FromQuery] string name)
+	{
+		var response = await useCase.ExecuteAsync(name);
+		
+		return Ok(response);
 	}
 }

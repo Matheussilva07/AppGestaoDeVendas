@@ -46,7 +46,7 @@ partial class FormSalesList
 		// maskedTextBox_Period
 		// 
 		maskedTextBox_Period.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-		maskedTextBox_Period.Location = new Point(350, 3);
+		maskedTextBox_Period.Location = new Point(607, 3);
 		maskedTextBox_Period.Mask = "00/0000";
 		maskedTextBox_Period.Name = "maskedTextBox_Period";
 		maskedTextBox_Period.Size = new Size(100, 27);
@@ -55,7 +55,7 @@ partial class FormSalesList
 		// Btn_Filter_Sales
 		// 
 		Btn_Filter_Sales.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-		Btn_Filter_Sales.Location = new Point(456, 6);
+		Btn_Filter_Sales.Location = new Point(713, 3);
 		Btn_Filter_Sales.Name = "Btn_Filter_Sales";
 		Btn_Filter_Sales.Size = new Size(75, 23);
 		Btn_Filter_Sales.TabIndex = 2;
@@ -71,7 +71,11 @@ partial class FormSalesList
 		Controls.Add(Btn_Filter_Sales);
 		Controls.Add(maskedTextBox_Period);
 		Controls.Add(dataGridView_Sales);
+		FormBorderStyle = FormBorderStyle.FixedSingle;
+		MaximizeBox = false;
+		MinimizeBox = false;
 		Name = "FormSalesList";
+		StartPosition = FormStartPosition.CenterScreen;
 		Text = "FormSalesList";
 		((System.ComponentModel.ISupportInitialize)dataGridView_Sales).EndInit();
 		ResumeLayout(false);

@@ -43,6 +43,9 @@ partial class FormProducts
 		label5 = new Label();
 		txt_Description = new TextBox();
 		txt_Id = new TextBox();
+		menuStrip1 = new MenuStrip();
+		produtosToolStripMenuItem = new ToolStripMenuItem();
+		menuStrip1.SuspendLayout();
 		SuspendLayout();
 		// 
 		// Btn_Cadastrar_Produto
@@ -59,7 +62,7 @@ partial class FormProducts
 		// txt_Name
 		// 
 		txt_Name.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-		txt_Name.Location = new Point(111, 16);
+		txt_Name.Location = new Point(111, 39);
 		txt_Name.Name = "txt_Name";
 		txt_Name.Size = new Size(345, 27);
 		txt_Name.TabIndex = 2;
@@ -69,7 +72,7 @@ partial class FormProducts
 		// 
 		label1.AutoSize = true;
 		label1.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-		label1.Location = new Point(12, 19);
+		label1.Location = new Point(12, 42);
 		label1.Name = "label1";
 		label1.Size = new Size(62, 19);
 		label1.TabIndex = 3;
@@ -112,7 +115,7 @@ partial class FormProducts
 		// 
 		label2.AutoSize = true;
 		label2.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-		label2.Location = new Point(12, 203);
+		label2.Location = new Point(12, 226);
 		label2.Name = "label2";
 		label2.Size = new Size(61, 19);
 		label2.TabIndex = 8;
@@ -121,7 +124,7 @@ partial class FormProducts
 		// txt_Price
 		// 
 		txt_Price.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-		txt_Price.Location = new Point(111, 200);
+		txt_Price.Location = new Point(111, 223);
 		txt_Price.Name = "txt_Price";
 		txt_Price.Size = new Size(172, 27);
 		txt_Price.TabIndex = 7;
@@ -130,7 +133,7 @@ partial class FormProducts
 		// 
 		label3.AutoSize = true;
 		label3.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-		label3.Location = new Point(12, 157);
+		label3.Location = new Point(12, 180);
 		label3.Name = "label3";
 		label3.Size = new Size(109, 19);
 		label3.TabIndex = 10;
@@ -139,7 +142,7 @@ partial class FormProducts
 		// txt_Amount
 		// 
 		txt_Amount.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-		txt_Amount.Location = new Point(127, 154);
+		txt_Amount.Location = new Point(127, 177);
 		txt_Amount.Name = "txt_Amount";
 		txt_Amount.Size = new Size(156, 27);
 		txt_Amount.TabIndex = 9;
@@ -148,7 +151,7 @@ partial class FormProducts
 		// 
 		label4.AutoSize = true;
 		label4.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-		label4.Location = new Point(12, 111);
+		label4.Location = new Point(12, 134);
 		label4.Name = "label4";
 		label4.Size = new Size(71, 19);
 		label4.TabIndex = 12;
@@ -157,7 +160,7 @@ partial class FormProducts
 		// txt_Code
 		// 
 		txt_Code.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-		txt_Code.Location = new Point(111, 108);
+		txt_Code.Location = new Point(111, 131);
 		txt_Code.Name = "txt_Code";
 		txt_Code.Size = new Size(345, 27);
 		txt_Code.TabIndex = 11;
@@ -167,7 +170,7 @@ partial class FormProducts
 		// 
 		label5.AutoSize = true;
 		label5.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-		label5.Location = new Point(12, 65);
+		label5.Location = new Point(12, 88);
 		label5.Name = "label5";
 		label5.Size = new Size(93, 19);
 		label5.TabIndex = 14;
@@ -176,7 +179,7 @@ partial class FormProducts
 		// txt_Description
 		// 
 		txt_Description.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-		txt_Description.Location = new Point(111, 62);
+		txt_Description.Location = new Point(111, 85);
 		txt_Description.Name = "txt_Description";
 		txt_Description.Size = new Size(345, 27);
 		txt_Description.TabIndex = 13;
@@ -189,11 +192,30 @@ partial class FormProducts
 		txt_Id.Size = new Size(40, 27);
 		txt_Id.TabIndex = 15;
 		// 
+		// menuStrip1
+		// 
+		menuStrip1.BackColor = Color.SeaGreen;
+		menuStrip1.Items.AddRange(new ToolStripItem[] { produtosToolStripMenuItem });
+		menuStrip1.Location = new Point(0, 0);
+		menuStrip1.Name = "menuStrip1";
+		menuStrip1.Size = new Size(485, 24);
+		menuStrip1.TabIndex = 16;
+		menuStrip1.Text = "menuStrip1";
+		// 
+		// produtosToolStripMenuItem
+		// 
+		produtosToolStripMenuItem.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+		produtosToolStripMenuItem.ForeColor = Color.White;
+		produtosToolStripMenuItem.Name = "produtosToolStripMenuItem";
+		produtosToolStripMenuItem.Size = new Size(76, 20);
+		produtosToolStripMenuItem.Text = "Produtos";
+		produtosToolStripMenuItem.Click += ProdutosToolStripMenuItem_Click;
+		// 
 		// FormProducts
 		// 
 		AutoScaleDimensions = new SizeF(7F, 15F);
 		AutoScaleMode = AutoScaleMode.Font;
-		ClientSize = new Size(594, 344);
+		ClientSize = new Size(485, 331);
 		Controls.Add(txt_Id);
 		Controls.Add(label5);
 		Controls.Add(txt_Description);
@@ -209,8 +231,17 @@ partial class FormProducts
 		Controls.Add(label1);
 		Controls.Add(txt_Name);
 		Controls.Add(Btn_Cadastrar_Produto);
+		Controls.Add(menuStrip1);
+		FormBorderStyle = FormBorderStyle.FixedSingle;
+		MainMenuStrip = menuStrip1;
+		MaximizeBox = false;
+		MinimizeBox = false;
 		Name = "FormProducts";
-		Text = "FormProducts";
+		StartPosition = FormStartPosition.CenterScreen;
+		Text = "Nosso mercado";
+		Load += FormProducts_Load;
+		menuStrip1.ResumeLayout(false);
+		menuStrip1.PerformLayout();
 		ResumeLayout(false);
 		PerformLayout();
 	}
@@ -232,4 +263,6 @@ partial class FormProducts
 	private Label label5;
 	private TextBox txt_Description;
 	private TextBox txt_Id;
+	private MenuStrip menuStrip1;
+	private ToolStripMenuItem produtosToolStripMenuItem;
 }

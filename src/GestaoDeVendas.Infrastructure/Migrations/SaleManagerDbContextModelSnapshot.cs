@@ -83,11 +83,11 @@ namespace GestaoDeVendas.Infrastructure.Migrations
 
             modelBuilder.Entity("GestaoDeVendas.Domain.Entities.Sale", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<long>("SaleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("SaleId"));
 
                     b.Property<string>("AddressMarket")
                         .IsRequired()
@@ -99,6 +99,9 @@ namespace GestaoDeVendas.Infrastructure.Migrations
                     b.Property<DateTime>("DateOfSale")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Salesman")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -106,7 +109,7 @@ namespace GestaoDeVendas.Infrastructure.Migrations
                     b.Property<decimal>("TotalSaleAmount")
                         .HasColumnType("decimal(65,30)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SaleId");
 
                     b.HasIndex("CostumerId");
 
@@ -177,7 +180,7 @@ namespace GestaoDeVendas.Infrastructure.Migrations
             modelBuilder.Entity("GestaoDeVendas.Domain.Entities.Sale", b =>
                 {
                     b.HasOne("GestaoDeVendas.Domain.Entities.Costumer", "Costumer")
-                        .WithMany()
+                        .WithMany("Sales")
                         .HasForeignKey("CostumerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -202,6 +205,11 @@ namespace GestaoDeVendas.Infrastructure.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Sale");
+                });
+
+            modelBuilder.Entity("GestaoDeVendas.Domain.Entities.Costumer", b =>
+                {
+                    b.Navigation("Sales");
                 });
 
             modelBuilder.Entity("GestaoDeVendas.Domain.Entities.Sale", b =>

@@ -32,6 +32,7 @@ internal class GetSaleByIdUseCase : IGetSaleByIdUseCase
 			AddressMarket = sale.AddressMarket,
 			DateOfSale = sale.DateOfSale,
 			Products = productList.Select(p => p.Name).ToList(),
+			PaymentType = (Communication.Enums.PaymentType)sale.PaymentType,
 			TotalSaleAmount = sale.TotalSaleAmount,		
 		};
 	}

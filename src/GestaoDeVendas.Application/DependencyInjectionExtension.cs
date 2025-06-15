@@ -1,5 +1,6 @@
 ﻿using GestaoDeVendas.Application.Automapper;
 using GestaoDeVendas.Application.UseCases.Costumers.Delete;
+using GestaoDeVendas.Application.UseCases.Costumers.GetByName;
 using GestaoDeVendas.Application.UseCases.Costumers.GetCostumerByName;
 using GestaoDeVendas.Application.UseCases.Costumers.GetCostumersList;
 using GestaoDeVendas.Application.UseCases.Costumers.Register;
@@ -14,6 +15,7 @@ using GestaoDeVendas.Application.UseCases.Sales.Delete;
 using GestaoDeVendas.Application.UseCases.Sales.FilterSalesByDate;
 using GestaoDeVendas.Application.UseCases.Sales.GetSaleById;
 using GestaoDeVendas.Application.UseCases.Sales.Register;
+using GestaoDeVendas.Application.UseCases.Sales.Update;
 using GestaoDeVendas.Application.UseCases.SoldProducts;
 using GestaoDeVendas.Application.UseCases.Users.Register;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +36,7 @@ public static class DependencyInjectionExtension
 		services.AddScoped<IRegisterCostumerUseCase, RegisterCostumerUseCase>();
 		services.AddScoped<IGetCostumersListUseCase, GetCostumersListUseCase>();
 		services.AddScoped<IGetCostumerByIdUseCase, GetCostumerByIdUseCase>();
+		services.AddScoped<IGetByNameUseCase, GetByNameUseCase>();
 		services.AddScoped<IDeleteCostumerUseCase, DeleteCostumerUseCase>();
 		services.AddScoped<IUpdateCostumerUseCase, UpdateCostumerUseCase>();
 
@@ -57,6 +60,7 @@ public static class DependencyInjectionExtension
 		services.AddScoped<IDeleteSaleUseCase, DeleteSaleUseCase>();
 		services.AddScoped<IGetProductsListOfASaleUseCase, GetProductsListOfASaleUseCase>();
 		services.AddScoped<IFilterSalesByDateUseCase, FilterSalesByDateUseCase>();
+		services.AddScoped<IUpdateSaleUseCase, UpdateSaleUseCase>();
 
 		#endregion
 

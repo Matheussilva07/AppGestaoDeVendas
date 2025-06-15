@@ -6,5 +6,5 @@ public class Costumer
 	public string Email { get; set; } = string.Empty;
 	public string Telephone { get; set; } = string.Empty;
 	public string Address { get; set; } = string.Empty;
-
+	public ICollection<Sale> Sales { get; set; } = [];
 }

@@ -102,7 +102,7 @@ namespace GestaoDeVendas.Infrastructure.Migrations
                         column: x => x.CostumerId,
                         principalTable: "Costumers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.SetNull);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

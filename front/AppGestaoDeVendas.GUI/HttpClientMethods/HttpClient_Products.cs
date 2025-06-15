@@ -1,11 +1,12 @@
 ﻿using AppGestaoDeVendas.GUI.Communication.Products.Requests;
 using AppGestaoDeVendas.GUI.Communication.Products.Responses;
 using AppGestaoDeVendas.GUI.Entities;
+using AppGestaoDeVendas.GUI.HttpClientMethods;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 
 namespace AppGestaoDeVendas.GUI;
-internal class HttpClientProducts
+internal class HttpClient_Products : BaseAdress
 {
 	public static async Task<HttpResponseMessage?> DoPost(RequestRegisterProduct request)
 	{
@@ -14,7 +15,7 @@ internal class HttpClientProducts
 		return await client.PostAsJsonAsync("/products", request);
 	
 	}
-	public static async Task<ResponseProduct?> DoGetById(long id)
+	public static async Task<ResponseProduct?> DoGetProductById(long id)
 	{
 		string route = $"/products/{id}";
 
@@ -28,7 +29,7 @@ internal class HttpClientProducts
 
 		return product;
 	}
-	public static async Task<ResponseProduct?> DoGetByName(string productName)
+	public static async Task<ResponseProduct?> DoGetProductByName(string productName)
 	{
 		string content = string.Empty;
 		
@@ -48,7 +49,7 @@ internal class HttpClientProducts
 		}
 		catch
 		{
-			MessageBox.Show(content);
+			MessageBox.Show(content,"Nosso mercado",MessageBoxButtons.OK,MessageBoxIcon.Warning);
 			return null;
 		}
 	}
@@ -102,13 +103,5 @@ internal class HttpClientProducts
 		}
 	
 	}
-	private static HttpClient GetHttpClient()
-	{
-		var client = new HttpClient
-		{
-			BaseAddress = new Uri("http://localhost:5221")
-		};
 
-		return client;
-	}
 }

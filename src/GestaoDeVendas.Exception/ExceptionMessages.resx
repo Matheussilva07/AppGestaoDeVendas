@@ -120,4 +120,7 @@
   <data name="PRODUTO_NOT_FOUND" xml:space="preserve">
     <value>Produto não encontrado. </value>
   </data>
+  <data name="SALE_NOT_FOUND" xml:space="preserve">
+    <value>Venda não encontrada.</value>
+  </data>
 </root>

@@ -2,6 +2,7 @@
 using GestaoDeVendas.Application.UseCases.Sales.FilterSalesByDate;
 using GestaoDeVendas.Application.UseCases.Sales.GetSaleById;
 using GestaoDeVendas.Application.UseCases.Sales.Register;
+using GestaoDeVendas.Application.UseCases.Sales.Update;
 using GestaoDeVendas.Communication.Sales.Requests;
 using GestaoDeVendas.Communication.Sales.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -35,13 +36,13 @@ public class SalesController : ControllerBase
 	}
 
 	[HttpGet("filter-sales")]
-	[ProducesResponseType(typeof(ResponseSaleFilteredByDateJson),StatusCodes.Status200OK)]
+	[ProducesResponseType(typeof(ResponseSaleFilteredByDateJson), StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status204NoContent)]
 	public async Task<IActionResult> FilterSales([FromServices] IFilterSalesByDateUseCase useCase, [FromQuery] DateOnly period)
 	{
 		var response = await useCase.ExecuteAsync(period);
 
-		if(response.Count > 0)
+		if (response.Count > 0)
 			return Ok(response);
 		return NoContent();
 	}
@@ -56,6 +57,19 @@ public class SalesController : ControllerBase
 		await useCase.ExecuteAsync(id);
 
 		return NoContent();
+	}
+
+
+	[HttpPut]
+	[Route("{id}")]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<IActionResult> Update([FromServices] IUpdateSaleUseCase useCase, [FromBody] RequestUpdateSaleJson request, [FromRoute] long id)
+	{
+		await useCase.ExecuteAsync(request, id);
+
+		return NoContent();// O método só está atualizando as pripriedades de Sale, está faltando o Costumer e os produtos.
 	}
 
 }

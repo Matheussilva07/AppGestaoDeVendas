@@ -1,4 +1,6 @@
-﻿namespace GestaoDeVendas.Communication.Sales.Responses;
+﻿using GestaoDeVendas.Communication.Enums;
+
+namespace GestaoDeVendas.Communication.Sales.Responses;
 public class ResponseSaleByIdJson
 {
 
@@ -13,7 +15,8 @@ public class ResponseSaleByIdJson
 	public string AddressMarket { get; set; } = string.Empty;
 	public DateTime DateOfSale { get; set; } = DateTime.UtcNow;
 	public List<string> Products { get; set; } = [];
-	public decimal TotalSaleAmount { get; set; }
+    public PaymentType PaymentType { get; set; }
+    public decimal TotalSaleAmount { get; set; }
 
 	#endregion
 

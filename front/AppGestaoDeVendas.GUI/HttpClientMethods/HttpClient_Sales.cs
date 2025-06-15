@@ -1,11 +1,10 @@
 ﻿using AppGestaoDeVendas.GUI.Communication.Sales.Requests;
 using AppGestaoDeVendas.GUI.Communication.Sales.Responses;
 using Newtonsoft.Json;
-using System.Globalization;
 using System.Net.Http.Json;
 
 namespace AppGestaoDeVendas.GUI.HttpClientMethods;
-internal class HttpClientSales
+internal class HttpClient_Sales : BaseAdress
 {
 
 	public static async Task<bool> DoPost(RequestRegisterSale request)
@@ -18,8 +17,7 @@ internal class HttpClientSales
 
 		return httpResponse.IsSuccessStatusCode;
 	}
-
-	public static async Task<List<ResponseSaleFilteredByDate>?> FilterSalesByDate(DateOnly period)
+	public static async Task<List<ResponseSaleFilteredByDate>> FilterSalesByDate(DateOnly period)
 	{
 		HttpResponseMessage httpResponse = new();
 
@@ -35,7 +33,7 @@ internal class HttpClientSales
 
 			var sales = JsonConvert.DeserializeObject<List<ResponseSaleFilteredByDate>>(content);
 
-			return sales;
+			return sales!;
 		}
 		catch
 		{
@@ -46,12 +44,16 @@ internal class HttpClientSales
 			return [];
 		}
 	}
-	private static HttpClient GetHttpClient()
+
+	public static async Task<bool> DoDelete(long id)
 	{
-		var client = new HttpClient
-		{
-			BaseAddress = new Uri("http://localhost:5221")
-		};
-		return client;
+		string route = $"/sales/{id}";
+		
+		var client = GetHttpClient();
+
+		HttpResponseMessage httpResponse = await client.DeleteAsync(route);
+
+		return httpResponse.IsSuccessStatusCode;
 	}
+
 }

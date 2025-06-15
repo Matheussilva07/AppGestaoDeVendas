@@ -17,8 +17,6 @@ public class Automapping : Profile
     {
         RequestToEntity();
         EntityToResponse();
-  
-
 	}
 
     private void RequestToEntity()
@@ -30,6 +28,9 @@ public class Automapping : Profile
         CreateMap<RequestUpdateProductJson, Product>();
 
         CreateMap<RequestRegisterSaleJson, Sale>();
+        CreateMap<RequestUpdateSaleJson, Sale>();
+
+
         CreateMap<SoldProductData, SoldProduct>();
 
 
@@ -53,9 +54,6 @@ public class Automapping : Profile
             .ForMember(dest => dest.Salesman, config => config.MapFrom(src => src.Sale.Salesman))
             .ForMember(dest => dest.DateOfSale, config => config.MapFrom(src => src.Sale.DateOfSale));
         
-            //.ForMember(dest => dest.Products.Select(e => e.Product).ToList(), config => config.MapFrom(origem => origem.Product.Price))
-            //.ForPath(dest => dest.Products, config => config.MapFrom(origem => origem.Product));
-            //.ForMember(dest => dest.TotalSaleAmount, config => config.MapFrom(src => src.Sale.TotalSaleAmount));
 
         CreateMap<Sale, ResponseSaleByIdJson>()
             .ForMember(dest => dest.Name, config => config.MapFrom(src => src.Costumer.Name))
