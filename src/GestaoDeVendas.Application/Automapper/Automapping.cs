@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using GestaoDeVendas.Communication;
 using GestaoDeVendas.Communication.Costumers.Requests;
 using GestaoDeVendas.Communication.Costumers.Responses;
 using GestaoDeVendas.Communication.Products.Requests;
@@ -8,7 +7,6 @@ using GestaoDeVendas.Communication.Sales.Requests;
 using GestaoDeVendas.Communication.Sales.Responses;
 using GestaoDeVendas.Communication.Users.Requests;
 using GestaoDeVendas.Domain.Entities;
-using System.Xml.Linq;
 
 namespace GestaoDeVendas.Application.Automapper;
 public class Automapping : Profile

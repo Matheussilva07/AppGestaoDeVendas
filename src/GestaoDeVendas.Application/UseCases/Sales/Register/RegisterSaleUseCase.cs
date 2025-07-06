@@ -7,7 +7,7 @@ using GestaoDeVendas.Domain.Repositories.Products;
 using GestaoDeVendas.Domain.Repositories.Sales;
 
 namespace GestaoDeVendas.Application.UseCases.Sales.Register;
-internal class RegisterSaleUseCase : IRegisterSaleUseCase
+public class RegisterSaleUseCase : IRegisterSaleUseCase
 {
     private readonly IMapper _mapper;
     private readonly IWriteOnlySalesRepository _repository;

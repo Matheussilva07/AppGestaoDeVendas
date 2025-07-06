@@ -1,4 +1,5 @@
-﻿using AppGestaoDeVendas.GUI.Communication.Sales.Responses;
+﻿using AppGestaoDeVendas.GUI.Communication.Sales.Requests;
+using AppGestaoDeVendas.GUI.Communication.Sales.Responses;
 using AppGestaoDeVendas.GUI.HttpClientMethods;
 
 namespace AppGestaoDeVendas.GUI.Forms;
@@ -60,7 +61,7 @@ public partial class FormSingleSale : Form
 
 	private async void Btn_Delete_Click(object sender, EventArgs e)
 	{
-		if (MessageBox.Show("Deseja realmente deletar?","Nosso mercado",MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+		if (MessageBox.Show("Deseja realmente deletar?", "Nosso mercado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 		{
 			bool isSuccessful = await HttpClient_Sales.DoDelete(Sale.Id);
 
@@ -71,8 +72,30 @@ public partial class FormSingleSale : Form
 			}
 
 			MessageBox.Show("Deletado com sucesso.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-		}	
+		}
 	}
+
+	private async void Btn_Update_Click(object sender, EventArgs e)
+	{
+		long saleId = Convert.ToInt64(Lbl_Id.Text);
+
+		var request = new RequestUpdateSale
+		{
+			Salesman = Txt_Salesman.Text,
+			AddressMarket = Txt_MarketAddress.Text
+		};
+
+		bool isSuccessful = await HttpClient_Sales.DoPut(saleId, request);
+
+		if (!isSuccessful)
+		{
+			MessageBox.Show("Erro ao atualizar.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			return;
+		}
+
+		MessageBox.Show("Atualizado com sucesso.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+	}
+
 }
 
 					 

@@ -1,6 +1,4 @@
-﻿using AppGestaoDeVendas.GUI.Communication.Products.Responses;
-
-namespace AppGestaoDeVendas.GUI.Forms;
+﻿namespace AppGestaoDeVendas.GUI.Forms;
 public partial class FormProductsList : Form
 {
 	public FormProductsList()

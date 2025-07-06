@@ -1,9 +1,10 @@
 ﻿using GestaoDeVendas.Communication.Sales.Responses;
 using GestaoDeVendas.Domain.Repositories.Sales;
 using GestaoDeVendas.Domain.Repositories.SoldProducts;
+using GestaoDeVendas.Exception.ExceptionBase;
 
 namespace GestaoDeVendas.Application.UseCases.Sales.GetSaleById;
-internal class GetSaleByIdUseCase : IGetSaleByIdUseCase 
+public class GetSaleByIdUseCase : IGetSaleByIdUseCase 
 {
 	private readonly IReadOnlySalesRepository _repository;
 	private readonly IReadOnlySoldProductsRepository _readOnlySoldProductsRepository;
@@ -21,7 +22,7 @@ internal class GetSaleByIdUseCase : IGetSaleByIdUseCase
 
 		if (sale is null)
 		{
-			 throw new ArgumentException("Venda não encontrada");
+			 throw new NotFoundException("Venda não encontrada");
 		}
 
 		return new ResponseSaleByIdJson

@@ -33,7 +33,7 @@ public class Program
 			});
 		});
 
-		//builder.Services.AddMvc(config => config.Filters.Add(new ExceptionFilter()));
+		builder.Services.AddMvc(config => config.Filters.Add(new ExceptionFilter()));
 
 		var app = builder.Build();
 

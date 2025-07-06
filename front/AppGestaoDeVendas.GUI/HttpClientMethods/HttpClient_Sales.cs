@@ -44,7 +44,6 @@ internal class HttpClient_Sales : BaseAdress
 			return [];
 		}
 	}
-
 	public static async Task<bool> DoDelete(long id)
 	{
 		string route = $"/sales/{id}";
@@ -52,6 +51,17 @@ internal class HttpClient_Sales : BaseAdress
 		var client = GetHttpClient();
 
 		HttpResponseMessage httpResponse = await client.DeleteAsync(route);
+
+		return httpResponse.IsSuccessStatusCode;
+	}
+
+	public static async Task<bool> DoPut(long id, RequestUpdateSale request )
+	{
+		string route = $"/sales/{id}";
+
+		var client = GetHttpClient();
+
+		HttpResponseMessage httpResponse = await client.PutAsJsonAsync(route, request);
 
 		return httpResponse.IsSuccessStatusCode;
 	}

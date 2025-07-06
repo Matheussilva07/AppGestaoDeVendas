@@ -43,6 +43,8 @@ partial class FormSingleSale
 		Txt_Client_Email = new TextBox();
 		Txt_Client_Name = new TextBox();
 		groupBox2 = new GroupBox();
+		label10 = new Label();
+		Txt_Payment = new TextBox();
 		maskedTextBox_SaleDate = new MaskedTextBox();
 		label8 = new Label();
 		label7 = new Label();
@@ -51,8 +53,6 @@ partial class FormSingleSale
 		Btn_Delete = new Button();
 		label9 = new Label();
 		Lbl_Id = new Label();
-		label10 = new Label();
-		Txt_Payment = new TextBox();
 		groupBox1.SuspendLayout();
 		groupBox2.SuspendLayout();
 		SuspendLayout();
@@ -208,6 +208,24 @@ partial class FormSingleSale
 		groupBox2.TabStop = false;
 		groupBox2.Text = "Venda";
 		// 
+		// label10
+		// 
+		label10.AutoSize = true;
+		label10.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+		label10.Location = new Point(10, 176);
+		label10.Name = "label10";
+		label10.Size = new Size(108, 19);
+		label10.TabIndex = 22;
+		label10.Text = "Pagamento:";
+		// 
+		// Txt_Payment
+		// 
+		Txt_Payment.Font = new Font("Tahoma", 12F);
+		Txt_Payment.Location = new Point(121, 173);
+		Txt_Payment.Name = "Txt_Payment";
+		Txt_Payment.Size = new Size(156, 27);
+		Txt_Payment.TabIndex = 21;
+		// 
 		// maskedTextBox_SaleDate
 		// 
 		maskedTextBox_SaleDate.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -256,6 +274,7 @@ partial class FormSingleSale
 		Btn_Update.TabIndex = 14;
 		Btn_Update.Text = "Editar";
 		Btn_Update.UseVisualStyleBackColor = true;
+		Btn_Update.Click += Btn_Update_Click;
 		// 
 		// Btn_Delete
 		// 
@@ -287,24 +306,6 @@ partial class FormSingleSale
 		Lbl_Id.Size = new Size(43, 14);
 		Lbl_Id.TabIndex = 17;
 		Lbl_Id.Text = "stringID";
-		// 
-		// label10
-		// 
-		label10.AutoSize = true;
-		label10.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-		label10.Location = new Point(10, 176);
-		label10.Name = "label10";
-		label10.Size = new Size(108, 19);
-		label10.TabIndex = 22;
-		label10.Text = "Pagamento:";
-		// 
-		// Txt_Payment
-		// 
-		Txt_Payment.Font = new Font("Tahoma", 12F);
-		Txt_Payment.Location = new Point(121, 173);
-		Txt_Payment.Name = "Txt_Payment";
-		Txt_Payment.Size = new Size(156, 27);
-		Txt_Payment.TabIndex = 21;
 		// 
 		// FormSingleSale
 		// 

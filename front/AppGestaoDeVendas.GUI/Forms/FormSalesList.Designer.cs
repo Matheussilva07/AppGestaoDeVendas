@@ -51,6 +51,7 @@ partial class FormSalesList
 		maskedTextBox_Period.Name = "maskedTextBox_Period";
 		maskedTextBox_Period.Size = new Size(100, 27);
 		maskedTextBox_Period.TabIndex = 1;
+		maskedTextBox_Period.KeyDown += MaskedTextBox_Period_KeyDown;
 		// 
 		// Btn_Filter_Sales
 		// 

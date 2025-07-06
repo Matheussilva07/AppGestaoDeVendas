@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using GestaoDeVendas.Communication.Sales.Requests;
 using GestaoDeVendas.Domain;
-using GestaoDeVendas.Domain.Entities;
-using GestaoDeVendas.Domain.Repositories.Costumers;
 using GestaoDeVendas.Domain.Repositories.Sales;
 using GestaoDeVendas.Exception;
 using GestaoDeVendas.Exception.ExceptionBase;
 
 namespace GestaoDeVendas.Application.UseCases.Sales.Update;
-internal class UpdateSaleUseCase : IUpdateSaleUseCase
+public class UpdateSaleUseCase : IUpdateSaleUseCase
 {
 	private readonly IMapper _mapper;
 	private readonly IUnitOfWork _unitOfWork;

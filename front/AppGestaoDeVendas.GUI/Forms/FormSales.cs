@@ -18,36 +18,45 @@ public partial class FormSales : Form
 	private async void Btn_Register_Click(object sender, EventArgs e)
 	{
 
-		PaymentType paymentType = comboBox_PaymentType.Text switch
+		if (!string.IsNullOrWhiteSpace(Txt_Salesman.Text) && !string.IsNullOrWhiteSpace(Txt_Customer.Text) && !string.IsNullOrWhiteSpace(Txt_Amount.Text))
 		{
-			"Cartão" => PaymentType.Card,
-			"Pix" => PaymentType.Pix,
-			"Boleto" => PaymentType.Boleto,
-			_ => throw new NotImplementedException()
-		};
-			
-		var request = new RequestRegisterSale
-		{
-			Salesman = Txt_Salesman.Text,
-			AddressMarket = comboBox_MarketAddress.Text,
-			PaymentType = paymentType,
-			CostumerId = _costumerId,
-			Products = _productsList	
-		};
+			PaymentType paymentType = comboBox_PaymentType.Text switch
+			{
+				"Cartão" => PaymentType.Card,
+				"Pix" => PaymentType.Pix,
+				"Boleto" => PaymentType.Boleto,
+				_ => throw new NotImplementedException()
+			};
 
-		bool isSuccessfull = await HttpClient_Sales.DoPost(request);
+			var request = new RequestRegisterSale
+			{
+				Salesman = Txt_Salesman.Text,
+				AddressMarket = comboBox_MarketAddress.Text,
+				PaymentType = paymentType,
+				CostumerId = _costumerId,
+				Products = _productsList
+			};
 
-		if (!isSuccessfull)
-		{
-			MessageBox.Show("Erro ao cadastrar a venda.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			bool isSuccessfull = await HttpClient_Sales.DoPost(request);
+
+			if (!isSuccessfull)
+			{
+				MessageBox.Show("Erro ao cadastrar a venda.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+			MessageBox.Show("Venda cadastrada.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			return;
 		}
-		MessageBox.Show("Venda cadastrada.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+		MessageBox.Show("Preencha todos os campos.","Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 	}
 
 	private async void Btn_Pesquisar_Produto_Click(object sender, EventArgs e)
 	{
-		_product = await HttpClient_Products.DoGetProductByName(TxtProduct.Text);
+		if (!string.IsNullOrWhiteSpace(TxtProduct.Text))
+		{
+			_product = await HttpClient_Products.DoGetProductByName(TxtProduct.Text);
+		}		
 
 		if (_product is not null)
 		{
@@ -59,7 +68,7 @@ public partial class FormSales : Form
 
 	private void Btn_Add_Product_Click(object sender, EventArgs e)
 	{
-		if (!string.IsNullOrEmpty(Txt_Amount.Text) && !string.IsNullOrWhiteSpace(TxtProduct.Text))
+		if (!string.IsNullOrWhiteSpace(TxtProduct.Text) && !string.IsNullOrEmpty(Txt_Amount.Text))
 		{
 			_productsList.Add(new SoldProduct
 			{

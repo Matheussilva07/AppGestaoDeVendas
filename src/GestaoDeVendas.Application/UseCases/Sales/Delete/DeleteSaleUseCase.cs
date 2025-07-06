@@ -1,5 +1,6 @@
 ﻿using GestaoDeVendas.Domain;
 using GestaoDeVendas.Domain.Repositories.Sales;
+using GestaoDeVendas.Exception.ExceptionBase;
 
 namespace GestaoDeVendas.Application.UseCases.Sales.Delete;
 public class DeleteSaleUseCase : IDeleteSaleUseCase
@@ -17,7 +18,7 @@ public class DeleteSaleUseCase : IDeleteSaleUseCase
 
 	public async Task ExecuteAsync(long saleId)
 	{
-		var sale = await _readOnlySalesRepository.GetSaleByIdAsync(saleId) ?? throw new ArgumentException("Venda não encontrada!");
+		var sale = await _readOnlySalesRepository.GetSaleByIdAsync(saleId) ?? throw new NotFoundException("Venda não encontrada!");
 
 		_salesRepository.Delete(sale);
 

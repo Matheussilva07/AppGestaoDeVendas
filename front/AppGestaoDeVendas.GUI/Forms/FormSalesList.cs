@@ -11,35 +11,9 @@ public partial class FormSalesList : Form
 	{
 		InitializeComponent();
 	}
-	private async void Btn_Filter_Sales_Click(object sender, EventArgs e)
+	private void Btn_Filter_Sales_Click(object sender, EventArgs e)
 	{
-		string valor = maskedTextBox_Period.Text;
-
-		DateTime data;
-
-		bool isValidDate = DateTime.TryParse(valor, out data);
-
-		if (!isValidDate)
-		{
-			MessageBox.Show("Data inválida", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-			return;
-		}
-
-		DateTime period = Convert.ToDateTime(valor).Date;
-
-		DateOnly date = new(period.Year, period.Month, period.Day);
-
-		Sales = await HttpClient_Sales.FilterSalesByDate(date!);
-
-		if (Sales is null)
-		{
-			MessageBox.Show("Vendas não encontradas.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-			return;
-		}
-
-		dataGridView_Sales.DataSource = Sales;
-
-		Formating_Design_DataGridView();
+		Filter_Sales();
 	}
 
 	private void DataGridView_Sales_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -96,7 +70,7 @@ public partial class FormSalesList : Form
 		{
 			Alignment = DataGridViewContentAlignment.MiddleCenter,
 		};
-		
+
 		dataGridView_Sales.Columns["TotalSaleAmount"].DefaultCellStyle = new DataGridViewCellStyle
 		{
 			Alignment = DataGridViewContentAlignment.MiddleRight
@@ -119,4 +93,42 @@ public partial class FormSalesList : Form
 		return DataGridViewAutoSizeColumnMode.AllCells;
 	}
 
+	private async void Filter_Sales()
+	{
+		string valor = maskedTextBox_Period.Text;
+
+		DateTime data;
+
+		bool isValidDate = DateTime.TryParse(valor, out data);
+
+		if (!isValidDate)
+		{
+			MessageBox.Show("Data inválida", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			return;
+		}
+
+		DateTime period = Convert.ToDateTime(valor).Date;
+
+		DateOnly date = new(period.Year, period.Month, period.Day);
+
+		Sales = await HttpClient_Sales.FilterSalesByDate(date!);
+
+		if (Sales is null)
+		{
+			MessageBox.Show("Vendas não encontradas.", "Nosso mercado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			return;
+		}
+
+		dataGridView_Sales.DataSource = Sales;
+
+		Formating_Design_DataGridView();
+	}
+
+	private void MaskedTextBox_Period_KeyDown(object sender, KeyEventArgs e)
+	{
+		if(e.KeyCode == Keys.Enter)
+		{
+			Filter_Sales();
+		}
+	}
 }
