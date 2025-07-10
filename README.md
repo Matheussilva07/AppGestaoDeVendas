@@ -52,8 +52,7 @@ O projeto segue os princípios da arquitetura em camadas e DDD (Domain-Driven De
 - MySQL Server
 - Visual Studio 2022 ou superior
 
-### Passos
 
-1. **Clone o repositório**
+ **Clone o repositório**
    ```bash
-   git clone https://github.com/seu-usuario/app-gestao-vendas.git
+   git clone https://github.com/Matheussilva07/AppGestaoDeVendas.git
