@@ -1,6 +1,6 @@
 # 🛒 App Gestão de Vendas
 
-![Imagem do App](/src/assets/appGestaoVendas.png)
+![Imagem do App](src/appGestaoVendas.png)
 
 Sistema de gerenciamento de vendas desenvolvido com arquitetura em camadas e princípios do DDD (Domain-Driven Design). A aplicação é composta por uma API em C# integrada com banco de dados MySQL e um front-end desenvolvido em WinForms.
 
