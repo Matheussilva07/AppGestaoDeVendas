@@ -19,13 +19,13 @@ public static class DependencyInjectionExtension
 {
 	public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
 	{
-		AddDbContext(services, configuration);
+		AddDbContext(services);
 		AddDependencyInjection(services);
 		AddSecurityToken(services, configuration);
 	}
-	private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
+	private static void AddDbContext(IServiceCollection services)
 	{
-		string connectionString = configuration.GetConnectionString("connection")!;
+		string connectionString = Environment.GetEnvironmentVariable("_GestorDeVendasDb_", EnvironmentVariableTarget.User)!;
 		
 		services.AddDbContext<SaleManagerDbContext>(config => config.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 	}
