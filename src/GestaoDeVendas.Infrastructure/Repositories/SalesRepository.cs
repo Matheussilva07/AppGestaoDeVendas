@@ -4,11 +4,10 @@ using GestaoDeVendas.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestaoDeVendas.Infrastructure.Repositories;
-internal class SalesRepository : IWriteOnlySalesRepository, IReadOnlySalesRepository , IUpdateOnlySalesRepository
+internal class SalesRepository : IWriteOnlySalesRepository, IReadOnlySalesRepository, IUpdateOnlySalesRepository
 {
 	private readonly SaleManagerDbContext _dbContext;
 	public SalesRepository(SaleManagerDbContext dbContext) => _dbContext = dbContext;
-
 
 	public async Task AddAsync(Sale sale)
 	{

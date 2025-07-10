@@ -23,13 +23,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Front", "Front", "{42253E53
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppGestaoDeVendas.GUI", "front\AppGestaoDeVendas.GUI\AppGestaoDeVendas.GUI.csproj", "{79C16A65-A87E-4581-B7CE-F04F2ED4A241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCommonUtilities", "tests\TestCommonUtilities\TestCommonUtilities.csproj", "{348632D0-BF44-48C6-A9DB-BAD83E0AB8BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCommonUtilities", "tests\TestCommonUtilities\TestCommonUtilities.csproj", "{348632D0-BF44-48C6-A9DB-BAD83E0AB8BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidatorsTests", "tests\ValidatorsTests\ValidatorsTests.csproj", "{A5BDC80C-3607-45C0-B6D8-7F0598E651F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidatorsTests", "tests\ValidatorsTests\ValidatorsTests.csproj", "{A5BDC80C-3607-45C0-B6D8-7F0598E651F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCasesTests", "tests\UseCasesTests\UseCasesTests.csproj", "{B6F67F0D-16FB-4011-A336-BC8CDEC23669}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseCasesTests", "tests\UseCasesTests\UseCasesTests.csproj", "{B6F67F0D-16FB-4011-A336-BC8CDEC23669}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SalesTests", "SalesTests", "{E5238306-271D-4F23-9488-245C2389AAC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{C77B99B9-0BBD-4286-A4B1-C0F68242845A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\appGestaoVendas.png = ..\..\appGestaoVendas.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +98,7 @@ Global
 		{A5BDC80C-3607-45C0-B6D8-7F0598E651F0} = {E5238306-271D-4F23-9488-245C2389AAC6}
 		{B6F67F0D-16FB-4011-A336-BC8CDEC23669} = {E5238306-271D-4F23-9488-245C2389AAC6}
 		{E5238306-271D-4F23-9488-245C2389AAC6} = {A7DD31EF-2420-4C74-A92C-B4E423638228}
+		{C77B99B9-0BBD-4286-A4B1-C0F68242845A} = {767E8F29-BE76-4CF4-84D3-4D07214D9824}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D20FA6CF-AB06-45AD-ABCF-1CD3CD8BCB02}

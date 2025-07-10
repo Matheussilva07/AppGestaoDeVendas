@@ -59,7 +59,6 @@ public class SalesController : ControllerBase
 		return NoContent();
 	}
 
-
 	[HttpPut]
 	[Route("{id}")]
 	[ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -69,7 +68,7 @@ public class SalesController : ControllerBase
 	{
 		await useCase.ExecuteAsync(request, id);
 
-		return NoContent();// O método só está atualizando as pripriedades de Sale, está faltando o Costumer e os produtos.
+		return NoContent();
 	}
 
 }

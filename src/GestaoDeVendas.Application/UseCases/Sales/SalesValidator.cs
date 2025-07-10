@@ -20,6 +20,5 @@ public class UpdateSalesValidator : AbstractValidator<RequestUpdateSaleJson>
 	{
 		RuleFor(s => s.Salesman).NotEmpty().WithMessage("Informe o vendedor.");
 		RuleFor(s => s.AddressMarket).NotEmpty().WithMessage("Informe o mercado onde foi feita a venda.");
-		//RuleFor(s => s.Products).NotEmpty().WithMessage("Liste os produtos vendidos.");
 	}
 }
